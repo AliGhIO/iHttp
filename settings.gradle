@@ -1,0 +1,2 @@
+include ':app', ':ihttp'
+rootProject.name = 'artifact'
