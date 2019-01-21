@@ -26,28 +26,28 @@ import io.aligh.ihttp.models.Post;
 
 public class iHttp {
 
-    static String ONLINE = "online";
-    static String OFFLINE = "offline";
-    static String SQLite = "sqlite";
-    static String RAM = "ram";
-    static String SP = "sp";
+    public static String ONLINE = "online";
+    public static String OFFLINE = "offline";
+    public static String SQLite = "sqlite";
+    public static String RAM = "ram";
+    public static String SP = "sp";
 
     private Service service;
     private Events events;
 
-    public iHttp(Context context) {
-        events = new Events(context);
-        service = new Service(context, this, events);
+    public static iHttp with(Context context) {
+        iHttp iHttp = new iHttp();
+        iHttp.events = new Events(context);
+        iHttp.service = new Service(context, iHttp, iHttp.events);
+        return iHttp;
     }
 
-//    public static iHttp with(Context context) {
-//    }
 
-
-    public iHttp url(String url) {
-        service.url = url;
-        service.is_url_set = true;
-        return this;
+    public static iHttp url(String url) {
+        iHttp iHttp = new iHttp();
+        iHttp.service.url = url;
+        iHttp.service.is_url_set = true;
+        return iHttp;
     }
 
 
