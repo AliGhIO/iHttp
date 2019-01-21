@@ -43,11 +43,10 @@ public class iHttp {
     }
 
 
-    public static iHttp url(String url) {
-        iHttp iHttp = new iHttp();
-        iHttp.service.url = url;
-        iHttp.service.is_url_set = true;
-        return iHttp;
+    public iHttp url(String url) {
+        service.url = url;
+        service.is_url_set = true;
+        return this;
     }
 
 

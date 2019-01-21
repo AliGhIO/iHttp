@@ -48,19 +48,19 @@ final class Events {
     }
 
     void onResponseReceive(final String res, final String where, final long time) {
-        onLog(Logs.INFO, "\treturn response from " + where);
+        onLog(Logs.INFO, "\treturn onResponse from " + where);
         if (onResponse != null) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    onResponse.response(res, where, time);
+                    onResponse.onResponse(res, where, time);
                 }
             });
         }
     }
 
     void onResponseTime(final long time) {
-        onLog(Logs.INFO, "\tresponse time = " + time);
+        onLog(Logs.INFO, "\tonResponse time = " + time);
         if (getResponseTime != null) {
             runOnUiThread(new Runnable() {
                 @Override
@@ -113,7 +113,7 @@ final class Events {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    onFailed.fail(code);
+                    onFailed.onFail(code);
                 }
             });
         }
@@ -147,9 +147,9 @@ final class Events {
                 public void run() {
                     try {
                         JSONArray ja = new JSONArray(jsonArray);
-                        onJsonArrayReceive.jsonArray(ja, where);
+                        onJsonArrayReceive.onJsonArrayReceive(ja, where);
                     } catch (Exception e) {
-                        onLog(Logs.ERROR, "failed to parse JsonArray , response from = " + where);
+                        onLog(Logs.ERROR, "failed to parse JsonArray , onResponse from = " + where);
                     }
                 }
             });
@@ -163,9 +163,9 @@ final class Events {
                 public void run() {
                     try {
                         JSONObject ja = new JSONObject(json);
-                        onJsonObjReceive.jsonObj(ja, where);
+                        onJsonObjReceive.onJsonObjReceive(ja, where);
                     } catch (Exception e) {
-                        onLog(Logs.ERROR, "failed to parse jsonObject , response from = " + where);
+                        onLog(Logs.ERROR, "failed to parse jsonObject , onResponse from = " + where);
                     }
                 }
             });

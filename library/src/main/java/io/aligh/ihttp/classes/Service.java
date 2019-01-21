@@ -358,7 +358,7 @@ final class Service {
         int code = 0;
         try {
             code = httpURLConnection.getResponseCode();
-            onInfo("response code = " + code + " : " + new HttpCodes().httpCode(code));
+            onInfo("onResponse code = " + code + " : " + new HttpCodes().httpCode(code));
             if (code == HttpsURLConnection.HTTP_OK) {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
 
@@ -403,7 +403,7 @@ final class Service {
                 cache(response, source);
 
         } else
-            Events.onLog(Logs.WARN, "response not changed from = " + source);
+            Events.onLog(Logs.WARN, "onResponse not changed from = " + source);
     }
 
     private void cache(String data, String where) {
