@@ -220,13 +220,13 @@ final class Service {
                 public void data(String string) {
                     if (encryptCache)
                         string = new Encrypt().decode(string);
-                    onDataReceive(string, io.aligh.ihttp.classes.iHttp.SQLite);
+                    onDataReceive(string, io.aligh.ihttp.classes.iHttp.SQLite, 0);
 
                 }
             });
 
         if (!data.equals("")) {
-            onDataReceive(data, source);
+            onDataReceive(data, source, 0);
         }
 
 
@@ -281,7 +281,7 @@ final class Service {
 
             String data = readHttpConnection(httpURLConnection);
 
-            onDataReceive(data, io.aligh.ihttp.classes.iHttp.ONLINE);
+            onDataReceive(data, io.aligh.ihttp.classes.iHttp.ONLINE, httpURLConnection.getResponseCode());
 
             httpURLConnection.disconnect();
             onInfo("disconnect httpURLConnection");
@@ -379,16 +379,16 @@ final class Service {
     }
 
     //9 //3
-    private void onDataReceive(String response, String source) {
+    private void onDataReceive(String response, String source, int code) {
 
         if (lastResponse.length() != response.length()) {
 
             onInfo("Response From => " + source);
             lastResponse = response;
 
-            done();
+            //done();
 
-            Events.onResponseReceive(response, source, done());
+            Events.onResponseReceive(response, source, done(), code);
 
             Events.onJsonArrayReceive(response, source);
             Events.onJsonObjReceive(response, source);

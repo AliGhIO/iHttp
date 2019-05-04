@@ -47,13 +47,13 @@ final class Events {
         handler = new Handler(context.getMainLooper());
     }
 
-    void onResponseReceive(final String res, final String where, final long time) {
+    void onResponseReceive(final String res, final String where, final long time, final int code) {
         onLog(Logs.INFO, "\treturn onResponse from " + where);
         if (onResponse != null) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    onResponse.onResponse(res, where, time);
+                    onResponse.onResponse(res, where, time, code);
                 }
             });
         }
