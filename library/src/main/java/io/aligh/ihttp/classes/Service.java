@@ -359,18 +359,24 @@ final class Service {
         try {
             code = httpURLConnection.getResponseCode();
             onInfo("onResponse code = " + code + " : " + new HttpCodes().httpCode(code));
-            if (code == HttpsURLConnection.HTTP_OK) {
-                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
 
-                String line;
-                while ((line = bufferedReader.readLine()) != null)
-                    stringBuilder.append(line);
-
-                bufferedReader.close();
-            } else {
-                Events.OnFailed(code);
-                onError("httpURLConnection is not 200");
-            }
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+            String line;
+            while ((line = bufferedReader.readLine()) != null)
+                stringBuilder.append(line);
+            bufferedReader.close();
+//            if (code == HttpsURLConnection.HTTP_OK) {
+//                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(httpURLConnection.getInputStream()));
+//
+//                String line;
+//                while ((line = bufferedReader.readLine()) != null)
+//                    stringBuilder.append(line);
+//
+//                bufferedReader.close();
+//            } else {
+//                Events.OnFailed(code);
+//                onError("httpURLConnection is not 200");
+//            }
             return stringBuilder.toString();
         } catch (Exception e) {
             onError(e.getMessage());
